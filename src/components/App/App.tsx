@@ -2,14 +2,15 @@ import React from 'react';
 import NavbarComponent from '../Navbar/Navbar';
 import Layout from '../Layout/Layout';
 import UserAvatar from '../UserAvatar/UserAvatar';
-import Card from '../Card/Card';
+import CardList from '../CardsList/CardList';
+import FormCreateAcc from '../Forms/CreateAccount/FormCreateAcc';
 
 const App = () => {
 
     return (
         <div className="app">
             <NavbarComponent />
-            <Card />
+            <FormCreateAcc />
         </div>
     )
 }
