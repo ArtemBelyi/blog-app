@@ -1,0 +1,14 @@
+@import '../../utils/var.modules.scss';
+
+* {
+    padding: 0;
+    margin: 0;
+}
+.forms-container {
+    @include templateForm;
+}
+.description {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}

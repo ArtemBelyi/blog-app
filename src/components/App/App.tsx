@@ -4,13 +4,15 @@ import Layout from '../Layout/Layout';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import CardList from '../CardsList/CardList';
 import FormCreateAcc from '../Forms/CreateAccount/FormCreateAcc';
+import FormSignIn from '../Forms/SignIn/FormSignIn';
+import FormEditProfile from '../Forms/EditProfile/FormEditProfile';
 
 const App = () => {
 
     return (
         <div className="app">
             <NavbarComponent />
-            <FormCreateAcc />
+            <FormEditProfile />
         </div>
     )
 }
