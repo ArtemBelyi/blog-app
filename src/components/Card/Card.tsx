@@ -1,26 +1,24 @@
 import React from 'react';
 import UserAvatar from '../UserAvatar/UserAvatar';
+import { Article } from '../../types/articles';
 const styles = require('./Card.module.scss')
 
-const Card = () => {
+const Card = (props: {article: Article}) => {
+    const { title, tagList, description, author, createdAt } = props.article
 
     return (
         <div className={styles["card-container"]}>
             <div className={styles["card-container__desc"]}>
-                <div className={styles["card-title"]}>Some article title</div>
+                <div className={styles["card-title"]}>{ title }</div>
                 <div className={styles["card-tags"]}>
-                    <div className={styles["card-tags__item"]}>Tag 1</div>
-                    <div className={styles["card-tags__item"]}>Tag 2</div>
+                    {tagList.map(tag => <div className={styles["card-tags__item"]} key={tag}>{tag}</div>)}
                 </div>
                 <div className={styles["card-text"]}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                    Nemo, consequuntur ratione nostrum dolorum iusto totam provident aperiam laboriosam enim possimus expedita, 
-                    alias delectus a dolore magnam porro aliquid dolor non.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, error! Labore excepturi amet perspiciatis laboriosam animi delectus, corporis suscipit deserunt libero fugit molestiae distinctio veritatis odio laudantium ad ullam dicta?
+                    { description }
                 </div>
             </div>
             <div className={styles["card-container__avatar"]}>
-                <UserAvatar />
+                <UserAvatar author={author} createdAt={createdAt}/>
             </div>
         </div>
     )

@@ -1,14 +1,26 @@
 import React from 'react'
 import logoUser from '../UserAvatar/logoUser.png'
+import { Profile } from '../../types/profile'
 const styles = require('./UserAvatar.module.scss')
 
-const UserAvatar = () => {
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+const timeDeparture = (date: string): string => {
+    const year = new Date(date).getFullYear()
+    const month = monthNames[new Date(date).getMonth()]
+    const day = new Date(date).getDate()
+    return `${month} ${day}, ${year}`
+}
+
+const UserAvatar = (props: {author: Profile, createdAt: string}) => {
+    const { username } = props.author
+    const createdAt = props.createdAt
 
     return (
         <div className={styles["container-avatar"]}>
             <div className={styles["description"]}>
-                <div className={styles["description__title"]}>John Doe</div>
-                <div className={styles["description__date"]}>March 5, 2021</div>
+                <div className={styles["description__title"]}>{ username }</div>
+                <div className={styles["description__date"]}>{timeDeparture(createdAt)}</div>
             </div>
             <div className={styles["logo"]}><img src={logoUser} alt="logoUser" className="logo-img" /></div>
         </div>

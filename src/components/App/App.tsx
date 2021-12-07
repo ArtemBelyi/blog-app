@@ -12,7 +12,7 @@ const App = () => {
     return (
         <div className="app">
             <NavbarComponent />
-            <FormEditProfile />
+            <CardList />
         </div>
     )
 }
