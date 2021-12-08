@@ -1,4 +1,5 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom'
 import NavbarComponent from '../Navbar/Navbar';
 import Layout from '../Layout/Layout';
 import UserAvatar from '../UserAvatar/UserAvatar';
@@ -11,8 +12,14 @@ const App = () => {
 
     return (
         <div className="app">
-            <NavbarComponent />
-            <CardList />
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<CardList />} />
+                    <Route path="signup" element={<FormCreateAcc />} />
+                    <Route path="signin" element={<FormSignIn />} />
+                    <Route path="*" element={<FormEditProfile />} />
+                </Route>
+            </Routes>
         </div>
     )
 }

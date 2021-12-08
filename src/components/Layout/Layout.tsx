@@ -1,11 +1,16 @@
 import React from 'react';
-import { Container } from 'react-bootstrap'
+import { Outlet } from 'react-router-dom'
+import NavbarComponent from '../Navbar/Navbar';
 
 const Layout = () => {
 
     return (
-        <Container>
-        </Container>
-    )
+        <>
+        <header>
+            <NavbarComponent />
+        </header>
+            <Outlet />
+        </>
+    )   
 }
 export default Layout
