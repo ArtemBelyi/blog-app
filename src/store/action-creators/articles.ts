@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const API_URL = 'http://kata.academy:8022/'
 
-export const fetchTicketsNoAuth = () => {
+export const fetchArticlesNoAuth = () => {
     return async (dispatch: Dispatch<ArticlesAction>) => {
         try {
             dispatch({type: ArticlesActionTypes.FETCH_ARTICLES})

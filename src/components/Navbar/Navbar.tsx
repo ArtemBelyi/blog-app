@@ -8,7 +8,7 @@ const NavbarComponent = () => {
     return (
         <Navbar collapseOnSelect expand="lg" >
             <Container>
-            <Navbar.Brand>Realworld Blog</Navbar.Brand>
+            <Navbar.Brand><NavLink className={styles['link-title']} to ="/articles">Realworld Blog</NavLink> </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end m-2'>
                 <Nav>

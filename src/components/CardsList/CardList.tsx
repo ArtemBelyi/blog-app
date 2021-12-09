@@ -4,14 +4,14 @@ import Card from '../Card/Card';
 import { Container } from 'react-bootstrap';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
-import { fetchTicketsNoAuth } from '../../store/action-creators/articles';
+import { fetchArticlesNoAuth } from '../../store/action-creators/articles';
 
 const CardList = () => {
     const {articles, loading, error} = useTypedSelector(state => state.articles)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchTicketsNoAuth())
+        dispatch(fetchArticlesNoAuth())
     }, [dispatch])
 
     if (loading) return <h1>Идет загрузка</h1>

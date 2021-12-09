@@ -1,22 +1,9 @@
-import { Profile } from "./profile";
+import { Article } from "./blog"
 
 export interface ArticlesState {
     articles: Article[],
     loading: boolean,
     error: null | string
-}
-
-export interface Article {
-    slug: string,
-    title: string,
-    description: string,
-    body: string,
-    tagList: string[],
-    createdAt: string,
-    updatedAt: string,
-    favorited: boolean,
-    favoritesCount: number,
-    author: Profile
 }
 
 export enum ArticlesActionTypes {
