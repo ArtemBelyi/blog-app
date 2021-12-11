@@ -11,12 +11,36 @@ const CreateNewArticle = () => {
         title: '',
         description: '',
         body: '',
-        tagList: []
+        tagList: ['']
     });
 
     const onConsole = (e: any) => {
         setData({
             ...data, title: e.target.value
+        })
+    }
+
+    const handleChangeInput = (index: any, e: any) => {
+        const values = [...data.tagList]
+        values[index] = e.target.value
+        setData({
+            ...data, tagList: values
+        })
+    }
+
+    const addTag = () => {
+        const tags = [...data.tagList]
+        tags.push('')
+        setData({
+            ...data, tagList: tags
+        })
+    }
+
+    const removeTag = (index: number) => {
+        const values = [...data.tagList]
+        values.splice(index, 1)
+        setData({
+            ...data, tagList: values
         })
     }
 
@@ -28,7 +52,6 @@ const CreateNewArticle = () => {
       }
       setValidated(true);
     };
-    console.log(data)
 
     return (
         <Container className='pt-5 d-flex justify-content-center'>
@@ -71,20 +94,26 @@ const CreateNewArticle = () => {
                 <Col xs="auto">
                     <Form.Group controlId="formBasicTags">
                         <Form.Label>Tags</Form.Label>
-                        <div className='d-flex align-items-center mt-1'>
-                            <Form.Control
-                                type="text"
-                                placeholder="Tag" 
-                                defaultValue=""
-                            />
-                            <Col md={{ span: 3, offset: 1 }}>
-                                <Button variant="outline-danger">Delete</Button>
-                            </Col>
-                        </div>
+                        {data.tagList.map((item, index) => {
+                            return (
+                                <div className='d-flex align-items-center mt-1' key={index}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Tag" 
+                                    value={item}
+                                    name='tagList'
+                                    onChange={e => handleChangeInput(index, e)}
+                                />
+                                <Col md={{ span: 3, offset: 1 }}>
+                                    <Button variant="outline-danger" onClick={() => removeTag(index)}>Delete</Button>
+                                </Col>
+                            </div>
+                            )
+                        })}
                     </Form.Group>
                 </Col>
                 <Col xs="auto">
-                    <Button variant="outline-primary">Add tag</Button>
+                    <Button variant="outline-primary" onClick={addTag}>Add tag</Button>
                 </Col>
             </Row>
 

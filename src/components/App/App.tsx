@@ -1,8 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
-import NavbarComponent from '../Navbar/Navbar';
 import Layout from '../Layout/Layout';
-import UserAvatar from '../UserAvatar/UserAvatar';
 import CardList from '../CardsList/CardList';
 import FormCreateAcc from '../Forms/CreateAccount/FormCreateAcc';
 import FormSignIn from '../Forms/SignIn/FormSignIn';

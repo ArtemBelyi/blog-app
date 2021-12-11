@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
 import UserAvatar from '../UserAvatar/UserAvatar';
-import { Article } from '../../types/blog';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Container } from 'react-bootstrap';
@@ -16,7 +15,7 @@ const BlogPage = () => {
 
     useEffect(() => {
         dispatch(fetchBlog(slug))
-    }, [dispatch])
+    }, [dispatch, slug])
 
     if (loading) return <h1>Идет загрузка</h1>
     if (error) return <h1>Ошибка загрузки</h1>
