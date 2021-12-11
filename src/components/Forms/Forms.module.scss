@@ -12,3 +12,6 @@
     text-align: center;
     font-size: 12px;
 }
+.new-articles-container {
+    @include form-articles;
+}

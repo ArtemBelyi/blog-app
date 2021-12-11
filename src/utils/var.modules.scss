@@ -17,3 +17,11 @@ $cardTitleColor: #1890FF;
     font-size: 14px;
     border-radius: 5px;
 }
+@mixin form-articles {
+    @include shadowCard;
+    width: 940px;
+    padding: 48px 32px;
+    color: $formsFontsColor;
+    font-size: 14px;
+    border-radius: 5px;
+}

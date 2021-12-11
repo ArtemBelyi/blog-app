@@ -12,8 +12,9 @@ const NavbarComponent = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end m-2'>
                 <Nav>
-                    <NavLink className={({isActive}) => isActive ? styles['link'] + ' ' + styles['link_active'] : styles['link']} to ="/signin">Sign In</NavLink> 
-                    <NavLink className={({isActive}) => isActive ? styles['link'] + ' ' + styles['link_active'] : styles['link']} to ="/signup">Sign Up</NavLink> 
+                    <NavLink className={styles['link'] + ' ' + styles['link_active']} to ="articles/new">Create article</NavLink> 
+                    <NavLink className={styles['link-in']} to ="/signin">Sign In</NavLink> 
+                    <NavLink className={styles['link'] + ' ' + styles['link_active']} to ="/signup">Sign Up</NavLink> 
                 </Nav>
             </Navbar.Collapse>
             </Container>

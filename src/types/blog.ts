@@ -19,6 +19,14 @@ export interface Article {
     author: Profile
 }
 
+export interface NewArticle {
+    slug: string,
+    title: string,
+    description: string,
+    body: string,
+    tagList: string[]
+}
+
 export enum BlogActionTypes {
     FETCH_BLOG = 'FETCH_BLOG',
     FETCH_BLOG_SUCCESS = 'FETCH_BLOG_SUCCESS',
