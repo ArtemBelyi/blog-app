@@ -6,7 +6,7 @@ import FormCreateAcc from '../Forms/CreateAccount/FormCreateAcc';
 import FormSignIn from '../Forms/SignIn/FormSignIn';
 import FormEditProfile from '../Forms/EditProfile/FormEditProfile';
 import BlogPage from '../BlogPage/BlogPage';
-import NewArticle from '../Forms/CreateArticle/NewArticle';
+import CreateNewArticle from '../Forms/CreateArticle/NewArticle';
 
 const App = () => {
 
@@ -16,7 +16,7 @@ const App = () => {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<CardList />} />
                     <Route path="articles" element={<CardList />} />
-                    <Route path="articles/new" element={<NewArticle />} />
+                    <Route path="articles/new" element={<CreateNewArticle />} />
                     <Route path="articles/:slug" element={<BlogPage />} />
                     <Route path="signup" element={<FormCreateAcc />} />
                     <Route path="signin" element={<FormSignIn />} />

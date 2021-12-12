@@ -3,6 +3,7 @@ import { NewArticle } from '../../../types/blog';
 import { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
+import { createFetchNewArticle } from './service';
 const styles = require('../Forms.module.scss');
 
 const CreateNewArticle = () => {
@@ -14,13 +15,13 @@ const CreateNewArticle = () => {
     });
     const form = useFormik({
         initialValues: {},
-        onSubmit: values => {
-            values = data
-            console.log(JSON.stringify(values, null, 2));
+        onSubmit: () => {
+            console.log(JSON.stringify({article: data}, null, 2))
+            createFetchNewArticle({article: data});
         }
     })
 
-    const handleChangeInputTags = (index: any, e: any) => {
+    const handleChangeInputTags = (index: any, e: any, data: NewArticle) => {
         const values = [...data.tagList]
         values[index] = e.target.value
         setData({
@@ -28,7 +29,7 @@ const CreateNewArticle = () => {
         })
     }
 
-    const addTag = () => {
+    const addTag = (data: NewArticle) => {
         const tags = [...data.tagList]
         tags.push('')
         setData({
@@ -36,7 +37,7 @@ const CreateNewArticle = () => {
         })
     }
 
-    const removeTag = (index: number) => {
+    const removeTag = (index: number, data: NewArticle) => {
         const values = [...data.tagList]
         values.splice(index, 1)
         setData({
@@ -95,10 +96,10 @@ const CreateNewArticle = () => {
                                     placeholder="Tag" 
                                     value={item}
                                     name='tagList'
-                                    onChange={e => handleChangeInputTags(index, e)}
+                                    onChange={e => handleChangeInputTags(index, e, data)}
                                 />
                                 <Col md={{ span: 3, offset: 1 }}>
-                                    <Button variant="outline-danger" onClick={() => removeTag(index)}>Delete</Button>
+                                    <Button variant="outline-danger" onClick={() => removeTag(index, data)}>Delete</Button>
                                 </Col>
                             </div>
                             )
@@ -106,7 +107,7 @@ const CreateNewArticle = () => {
                     </Form.Group>
                 </Col>
                 <Col xs="auto">
-                    <Button variant="outline-primary" onClick={addTag}>Add tag</Button>
+                    <Button variant="outline-primary" onClick={() => addTag(data)}>Add tag</Button>
                 </Col>
             </Row>
 
