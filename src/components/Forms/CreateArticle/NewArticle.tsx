@@ -2,25 +2,25 @@ import React from 'react';
 import { NewArticle } from '../../../types/blog';
 import { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { useFormik } from 'formik';
 const styles = require('../Forms.module.scss');
 
 const CreateNewArticle = () => {
-    const [validated, setValidated] = useState(false);
     const [data, setData] = useState<NewArticle>({
-        slug: '',
         title: '',
         description: '',
         body: '',
         tagList: ['']
     });
+    const form = useFormik({
+        initialValues: {},
+        onSubmit: values => {
+            values = data
+            console.log(JSON.stringify(values, null, 2));
+        }
+    })
 
-    const onConsole = (e: any) => {
-        setData({
-            ...data, title: e.target.value
-        })
-    }
-
-    const handleChangeInput = (index: any, e: any) => {
+    const handleChangeInputTags = (index: any, e: any) => {
         const values = [...data.tagList]
         values[index] = e.target.value
         setData({
@@ -44,18 +44,9 @@ const CreateNewArticle = () => {
         })
     }
 
-    const handleSubmit = (event: any) => {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      setValidated(true);
-    };
-
     return (
         <Container className='pt-5 d-flex justify-content-center'>
-            <Form className={styles['new-articles-container']} noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form className={styles['new-articles-container']} onSubmit={form.handleSubmit}>
 
             <div className="w-100 mb-4 text-center fs-5">Create new article</div>
 
@@ -65,8 +56,8 @@ const CreateNewArticle = () => {
                     required
                     type="text"
                     placeholder="Title"
-                    value={data.title}
-                    onChange={onConsole}
+                    value={ data.title }
+                    onChange={e => setData({...data, title: e.target.value})}
                 />
             </Form.Group>
 
@@ -75,8 +66,9 @@ const CreateNewArticle = () => {
                 <Form.Control
                     required
                     type="text"
-                    placeholder="Short description" 
-                    defaultValue=""
+                    placeholder="Short description"
+                    value={ data.description }
+                    onChange={e => setData({...data, description: e.target.value})}
                 />
             </Form.Group>
 
@@ -85,8 +77,9 @@ const CreateNewArticle = () => {
                     <Form.Control
                         as="textarea"
                         placeholder="Text"
+                        value={ data.body }
+                        onChange={e => setData({...data, body: e.target.value})}
                         style={{ height: '120px' }}
-                        defaultValue=""
                     />
             </Form.Group>
 
@@ -102,7 +95,7 @@ const CreateNewArticle = () => {
                                     placeholder="Tag" 
                                     value={item}
                                     name='tagList'
-                                    onChange={e => handleChangeInput(index, e)}
+                                    onChange={e => handleChangeInputTags(index, e)}
                                 />
                                 <Col md={{ span: 3, offset: 1 }}>
                                     <Button variant="outline-danger" onClick={() => removeTag(index)}>Delete</Button>

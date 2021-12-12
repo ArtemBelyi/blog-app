@@ -20,7 +20,6 @@ export interface Article {
 }
 
 export interface NewArticle {
-    slug: string,
     title: string,
     description: string,
     body: string,
