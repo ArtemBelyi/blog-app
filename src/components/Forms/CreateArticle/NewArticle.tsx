@@ -1,25 +1,26 @@
 import React from 'react';
-import { NewArticle } from '../../../types/blog';
+import { NewArticle, dataShow } from '../../../types/blog';
 import { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { createFetchNewArticle } from './service';
+import ModalWindow from '../../Modal/Modal'
 const styles = require('../Forms.module.scss');
 
 const CreateNewArticle = () => {
-    const [data, setData] = useState<NewArticle>({
+    const defaultData: NewArticle = {
         title: '',
         description: '',
         body: '',
         tagList: ['']
+    }
+    const [data, setData] = useState<NewArticle>(defaultData);
+    const [show, setShow] = useState<dataShow>({
+        show: false,
+        handleClose: () => {},
+        heading: '',
+        body:''
     });
-    const form = useFormik({
-        initialValues: {},
-        onSubmit: () => {
-            console.log(JSON.stringify({article: data}, null, 2))
-            createFetchNewArticle({article: data});
-        }
-    })
 
     const handleChangeInputTags = (index: any, e: any, data: NewArticle) => {
         const values = [...data.tagList]
@@ -44,6 +45,32 @@ const CreateNewArticle = () => {
             ...data, tagList: values
         })
     }
+    const handleClose = () => setShow({...show, show: false});
+    const handleShow = (a: dataShow) => setShow(a);
+
+    const form = useFormik({
+        initialValues: {},
+        onSubmit: () => {
+            createFetchNewArticle({article: data}).then(res => {
+                if(res.ok) {
+                    setData(defaultData)
+                    handleShow({
+                        show: true,
+                        handleClose: handleClose,
+                        heading: 'Успешно!',
+                        body:'Артикл успешно добавлен в список!'
+                    })
+                } else {
+                    handleShow({
+                        show: true,
+                        handleClose: handleClose,
+                        heading: 'Ошибка сохранения!',
+                        body:'Не удалось добавить новый артикл на сервер. ХЗ почему'
+                    })
+                }
+            })
+        }
+    })
 
     return (
         <Container className='pt-5 d-flex justify-content-center'>
@@ -115,6 +142,7 @@ const CreateNewArticle = () => {
                 Create
             </Button>
             </Form>
+            <ModalWindow dataModal={show}/>
         </Container>
     )
 }

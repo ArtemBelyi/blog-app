@@ -1,7 +1,7 @@
 import { NewArticle } from '../../../types/blog';
 
 const API_URL = 'http://kata.academy:8022/'
-const TOKEN = 'Token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJzdWIiOjE5MiwibmFtZSI6ImFiZWw0NThAZ21haWwuY29tIiwiaWF0IjoxNjM5MzMzNzk2fQ.VLogwg2-v0PWf3MIQqclSTSiTe3t3wbrCFFMECJbcWg'
+const TOKEN = 'Token eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJzdWIiOjIwNiwibmFtZSI6Inlha292bGV2YUBtYWlsLnJ1IiwiaWF0IjoxNjM5NDAyMDIwfQ.BL_kCk-XrQTEzCtwvRu-0O1faiYc9WfZIq6DHauMAVs'
 
 interface FetchArticle {
     article: NewArticle
@@ -17,5 +17,6 @@ export const createFetchNewArticle = async (data: FetchArticle) => {
             'Authorization': TOKEN
         }
     })
-    console.log(response)
+    return response
+    
 }

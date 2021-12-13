@@ -6,6 +6,13 @@ export interface BlogState {
     error: null | string
 }
 
+export interface dataShow {
+    show: boolean,
+    handleClose: Function,
+    heading: string,
+    body: string
+}
+
 export interface Article {
     slug: string,
     title: string,

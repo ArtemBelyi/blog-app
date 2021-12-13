@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 import Card from '../Card/Card';
-import { Container } from 'react-bootstrap';
+import PaginationBlog from '../Pagination/Pagination';
+import { Container, Pagination } from 'react-bootstrap';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { fetchArticlesNoAuth } from '../../store/action-creators/articles';
@@ -20,10 +21,13 @@ const CardList = () => {
     console.log(articles)
 
     return (
-        <Container className='h-100'>
-            {articles.slice(0, 5).map(article => {
-                return  <div className="item m-3 d-flex justify-content-center" key={article.slug}><Card article={article}/></div>
-            })}
+        <Container className='d-flex flex-column justify-content-between' style={{height: '850px'}}>
+            <div>
+                {articles.slice(0, 5).map(article => {
+                    return  <div className="item m-3 d-flex justify-content-center" key={article.slug}><Card article={article}/></div>
+                })}
+            </div>
+            <PaginationBlog />
         </Container>
     )
 }
