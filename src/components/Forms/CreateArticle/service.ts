@@ -8,7 +8,6 @@ interface FetchArticle {
 }
 
 export const createFetchNewArticle = async (data: FetchArticle) => {
-    console.log(JSON.stringify(data, null, 2))
     const response = await fetch(`${API_URL}articles`, {
         method: 'POST',
         body: JSON.stringify(data, null, 2),
@@ -18,5 +17,4 @@ export const createFetchNewArticle = async (data: FetchArticle) => {
         }
     })
     return response
-    
 }

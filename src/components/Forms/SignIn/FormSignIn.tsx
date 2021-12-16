@@ -1,11 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { loginUser } from '../../../store/action-creators/user';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 const styles = require('../Forms.module.scss');
 
-interface ValuesForm {
+export interface ValuesForm {
     email: string,
     password: string,
 }
@@ -16,6 +19,11 @@ const initialValues: ValuesForm = {
 };
 
 const FormSignIn = () => {
+    const {error} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const fromPage = location.state?.from?.pathname || '/'
 
     return (
         <Container className='pt-5 d-flex justify-content-center'>
@@ -33,7 +41,7 @@ const FormSignIn = () => {
                     })
                 }
                 onSubmit={(values) => {
-                    console.log(JSON.stringify(values, null, 2));
+                    dispatch(loginUser({user: values}, () => navigate(fromPage, {replace: true})))
                   }}
             >
                 {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isValid }) => (
@@ -71,12 +79,14 @@ const FormSignIn = () => {
                             {errors.password}
                         </Form.Control.Feedback>
                     </Form.Group>
+
+                    {error ? <div className="mb-3 text-danger text-center">{error}</div>: error}
     
                     <Button variant="primary" type="submit" className='w-100 mb-2'>
                         Login
                     </Button>
-    
-                    <div className={styles["description"]}>Don't have an account? <a href="#">Sign in</a></div>
+
+                    <div className={styles["description"]}>Don't have an account? <a href="#">Sign Up</a></div>
                     </Form>
                 )}
             </Formik>

@@ -1,6 +1,6 @@
 import React from 'react'
 import logoUser from '../UserAvatar/logoUser.png'
-import { Profile } from '../../types/profile'
+import { Profile } from '../../types/user'
 const styles = require('./UserAvatar.module.scss')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

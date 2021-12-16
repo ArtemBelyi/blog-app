@@ -7,7 +7,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { fetchArticlesNoAuth } from '../../store/action-creators/articles';
 import { Article } from '../../types/blog';
-import { setSourceMapRange } from 'typescript';
 
 const splitArray = (arr: Article[]) => {
     const size = 5
