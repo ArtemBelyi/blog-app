@@ -23,6 +23,10 @@ export const userReducer = (state = initialState, action: UserAction): UserState
             return {...state, loading: false, error: action.payload}
         case UserActionTypes.IS_LOGGED:
             return {...state, isAuth: true}
+        case UserActionTypes.EDIT_PROFILE_SUCCESS:
+            return {...state}
+        case UserActionTypes.EDIT_PROFILE_ERROR:
+            return {...state, loading: false, error: action.payload}
         default:
             return state
     }
