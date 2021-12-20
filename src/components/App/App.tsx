@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import Layout from '../Layout/Layout';
 import CardList from '../CardsList/CardList';
@@ -6,9 +6,16 @@ import FormCreateAcc from '../Forms/CreateAccount/FormCreateAcc';
 import FormSignIn from '../Forms/SignIn/FormSignIn';
 import FormEditProfile from '../Forms/EditProfile/FormEditProfile';
 import BlogPage from '../BlogPage/BlogPage';
+import { useDispatch } from 'react-redux';
 import CreateNewArticle from '../Forms/CreateArticle/NewArticle';
+import { isLogged } from '../../store/action-creators/user';
 
 const App = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(isLogged())
+    }, [dispatch])
 
     return (
         <div className="app">
@@ -20,7 +27,7 @@ const App = () => {
                     <Route path="articles/:slug" element={<BlogPage />} />
                     <Route path="signup" element={<FormCreateAcc />} />
                     <Route path="signin" element={<FormSignIn />} />
-                    <Route path="*" element={<FormEditProfile />} />
+                    <Route path="profile" element={<FormEditProfile />} />
                 </Route>
             </Routes>
         </div>

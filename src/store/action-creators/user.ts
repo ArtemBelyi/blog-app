@@ -9,14 +9,23 @@ interface UserForm {
     user: ValuesForm
 }
 
-export const loginUser = (data: UserForm, fn: Function) => {
+export const loginUser = (data: UserForm, route: Function) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
             const response = await axios.post(`${API_URL}users/login`, data)
+            sessionStorage.user = JSON.stringify(response.data.user)
             dispatch({type: UserActionTypes.LOGIN_USER_SUCCESS, payload: response.data.user})
-            fn()
+            route()
         } catch (e) {
             dispatch({type: UserActionTypes.LOGIN_USER_ERROR, payload: 'Incorrect email or password'})
+        }
+    }
+}
+
+export const isLogged = () => {
+    return (dispatch: Dispatch<UserAction>) => {
+        if (sessionStorage.user) {
+            dispatch({type: UserActionTypes.IS_LOGGED})
         }
     }
 }

@@ -8,6 +8,10 @@ import { useDispatch } from 'react-redux';
 import { fetchArticlesNoAuth } from '../../store/action-creators/articles';
 import { Article } from '../../types/blog';
 
+function compare (state: Article[]) {
+    return state.sort((a: Article, b: Article) => (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0))
+}
+
 const splitArray = (arr: Article[]) => {
     const size = 5
     let subarray = []
@@ -21,7 +25,9 @@ const CardList = () => {
     const {articles, loading, error} = useTypedSelector(state => state.articles)
     const [page, setPage] = useState(0)
     const dispatch = useDispatch()
-    const showArticle = splitArray([...articles])
+
+    const sortArticle = compare([...articles])
+    const showArticle = splitArray(sortArticle)
 
     useEffect(() => {
         dispatch(fetchArticlesNoAuth())
@@ -34,7 +40,7 @@ const CardList = () => {
     const errorMessage = error ? <h1>Идет загрузка</h1> : null
     const loadingMessage = loading ? <h1>Идет загрузка</h1> : null
     const articleList = articles.length !== 0 ?  showArticle[page].map(article => {
-        return  <div className="item m-3 d-flex justify-content-center" key={article.slug}><Card article={article}/></div>
+        return  <div className="item m-3 d-flex justify-content-center" key={`${article.slug}${Math.random()}`}><Card article={article}/></div>
     }) : null
 
     return (

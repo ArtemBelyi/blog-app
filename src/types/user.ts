@@ -24,6 +24,7 @@ export enum UserActionTypes {
     LOGIN_USER = 'LOGIN_USER',
     LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS',
     LOGIN_USER_ERROR = 'LOGIN_USER_ERROR',
+    IS_LOGGED = 'IS_LOGGED'
 }
 
 interface LoginUserAction {
@@ -40,6 +41,11 @@ interface LoginUserErrorAction {
     payload: string
 }
 
+interface IsLoggedAction {
+    type: UserActionTypes.IS_LOGGED
+}
+
 export type UserAction = LoginUserAction 
     | LoginUserSuccessAction
     | LoginUserErrorAction
+    | IsLoggedAction

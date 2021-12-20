@@ -38,3 +38,30 @@
         color: rgba(0,0,0,.6); 
     }
 }
+
+.link-out {
+    margin-left: 30px;
+    color: rgba(0,0,0,.9);
+    text-decoration: none;
+    border: 1px solid #FFF;
+    padding: 10px 14px;
+    border-radius: 5px;
+    &_active {
+        color: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(0, 0, 0, 0.75);
+    }
+    &:hover {
+        color: rgba(0,0,0,.6); 
+        opacity: 0.6;
+        border: 1px solid rgba(0,0,0,.6);
+    }
+}
+
+.link-profile {
+    margin-left: 30px;
+    color: rgba(0,0,0,.9);
+    text-decoration: none;
+    &:hover {
+        color: rgba(0,0,0,.6); 
+    }
+}
