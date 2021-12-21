@@ -23,7 +23,7 @@ const initialValues: ValuesFormEdit = {
 };
 
 const reduce = (value: ValuesFormEdit) => {
-    const result = Object.entries(value).filter(elem => elem[1] != false);
+    const result = Object.entries(value).filter(elem => elem[1] !== false);
     return Object.fromEntries(result)
   }
 
