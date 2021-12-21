@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { registerUser } from '../../../store/action-creators/user';
@@ -149,7 +149,7 @@ const FormCreateAcc = () => {
                         Create
                     </Button>
 
-                    <div className={styles["description"]}>Already have an account? <a href="#">Sign in</a></div>
+                    <div className={styles["description"]}>Already have an account? <NavLink to="/signin">Sign Up</NavLink></div>
                     </Form>
                 )}
             </Formik>

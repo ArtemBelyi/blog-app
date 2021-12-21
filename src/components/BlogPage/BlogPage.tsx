@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import UserAvatar from '../UserAvatar/UserAvatar';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { fetchBlog } from '../../store/action-creators/blog';
 import { useParams } from 'react-router-dom';
 const styles = require('./BlogPage.module.scss')
@@ -37,6 +37,10 @@ const BlogPage = () => {
             </div>
             <div className={styles["blogpage-container__avatar"]}>
                 <UserAvatar author={article.author} createdAt={article.createdAt}/>
+                <div className={styles["blogpage-container__button-group"]}>
+                    <Button className={styles["button-group__item"]} variant="outline-danger">Delete</Button>
+                    <Button className={styles["button-group__item"]} variant="outline-warning">Edit</Button>
+                </div>
             </div>
         </div>
         </Container>

@@ -50,7 +50,18 @@
     &__avatar {
         flex-basis: 25%;
         display: flex;
-        justify-content: flex-end;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: flex-end;
+        flex-direction: column;
     }
+    &__button-group {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+.button-group__item {
+    margin: 0px 5px;
+    flex-basis: 35%;
 }
