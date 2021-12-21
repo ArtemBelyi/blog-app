@@ -2,9 +2,10 @@ import { Dispatch } from "react"
 import { UserActionTypes, UserAction } from "../../types/user";
 import { ValuesForm } from "../../components/Forms/SignIn/FormSignIn";
 import { ValuesFormEdit } from "../../components/Forms/EditProfile/FormEditProfile";
+import { FormRegisterUser } from "../../components/Forms/CreateAccount/FormCreateAcc";
 import axios from 'axios'
 
-const API_URL = 'http://kata.academy:8022/'
+const API_URL = 'https://api.realworld.io/api/'
 
 interface UserForm {
     user: ValuesForm
@@ -12,6 +13,10 @@ interface UserForm {
 
 interface ProfileEdit {
     user: ValuesFormEdit
+}
+
+interface RegisterUser {
+    user: FormRegisterUser
 }
 
 export const loginUser = (data: UserForm, route: Function) => {
@@ -35,7 +40,7 @@ export const isLogged = () => {
     }
 }
 
-export const editProfile = (data: ProfileEdit) => {
+export const editProfile = (data: ProfileEdit, message: Function, removeField: Function ) => {
     const TOKEN = `Token ${JSON.parse(sessionStorage.user).token}`
     return async (dispatch: Dispatch<UserAction>) => {
         try {
@@ -46,12 +51,25 @@ export const editProfile = (data: ProfileEdit) => {
                 }
             })
             sessionStorage.user = JSON.stringify(response.data.user)
-            dispatch({type: UserActionTypes.LOGIN_USER_SUCCESS, payload: response.data.user})
-            console.log('Успешно')
-
+            dispatch({type: UserActionTypes.EDIT_PROFILE_SUCCESS, payload: response.data.user})
+            message()
+            removeField()
         } catch (e) {
-            console.log(e)
-            dispatch({type: UserActionTypes.EDIT_PROFILE_ERROR, payload: 'Error saved'})
+            dispatch({type: UserActionTypes.EDIT_PROFILE_ERROR, payload: 'Error saving changes'})
         }
     }
 }
+
+export const registerUser = (data: RegisterUser, route: Function) => {
+    return async (dispatch: Dispatch<UserAction>) => {
+        try {
+            const response = await axios.post(`${API_URL}users`, data)
+            sessionStorage.user = JSON.stringify(response.data.user)
+            dispatch({type: UserActionTypes.REGISTER_USER_SUCCESS, payload: response.data.user})
+            route()
+        } catch (e) {
+            dispatch({type: UserActionTypes.REGISTER_USER_ERROR, payload: 'Error create new user'})
+        }
+    }
+}
+

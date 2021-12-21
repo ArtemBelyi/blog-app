@@ -1,6 +1,6 @@
 import { NewArticle } from '../../../types/blog';
 
-const API_URL = 'http://kata.academy:8022/'
+const API_URL = 'https://api.realworld.io/api/'
 
 interface FetchArticle {
     article: NewArticle

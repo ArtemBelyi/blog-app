@@ -44,7 +44,7 @@ const FormSignIn = () => {
                     dispatch(loginUser({user: values}, () => navigate(fromPage, {replace: true})))
                   }}
             >
-                {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isValid }) => (
+                {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                     <Form className={styles['forms-container']} noValidate onSubmit={handleSubmit}>
 
                     <div className="w-100 mb-4 text-center fs-5">Sign In</div>

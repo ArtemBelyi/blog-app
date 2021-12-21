@@ -2,7 +2,7 @@ import { Dispatch } from "react"
 import { BlogActionTypes, BlogAction } from "../../types/blog"
 import axios from 'axios'
 
-const API_URL = 'http://kata.academy:8022/'
+const API_URL = 'https://api.realworld.io/api/'
 
 export const fetchBlog = (slug: string | undefined) => {
     return async (dispatch: Dispatch<BlogAction>) => {

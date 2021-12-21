@@ -21,12 +21,23 @@ export interface User {
 }
 
 export enum UserActionTypes {
+    REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS',
+    REGISTER_USER_ERROR = 'REGISTER_USER_ERROR',
     LOGIN_USER = 'LOGIN_USER',
     LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS',
     LOGIN_USER_ERROR = 'LOGIN_USER_ERROR',
     IS_LOGGED = 'IS_LOGGED',
     EDIT_PROFILE_SUCCESS = 'EDIT_PROFILE_SUCCESS',
     EDIT_PROFILE_ERROR = 'EDIT_PROFILE_ERROR'
+}
+interface RegisterUserSuccessAction {
+    type: UserActionTypes.REGISTER_USER_SUCCESS
+    payload: User
+}
+
+interface RegisterUserErrorAction {
+    type: UserActionTypes.REGISTER_USER_ERROR
+    payload: string
 }
 
 interface LoginUserAction {
@@ -49,6 +60,7 @@ interface IsLoggedAction {
 
 interface EditProfileAction {
     type: UserActionTypes.EDIT_PROFILE_SUCCESS
+    payload: User
 }
 
 interface EditProfileErrorAction {
@@ -62,3 +74,5 @@ export type UserAction = LoginUserAction
     | IsLoggedAction
     | EditProfileAction
     | EditProfileErrorAction
+    | RegisterUserSuccessAction
+    | RegisterUserErrorAction

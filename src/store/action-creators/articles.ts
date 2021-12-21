@@ -2,7 +2,7 @@ import { Dispatch } from "react"
 import { ArticlesActionTypes, ArticlesAction } from "../../types/articles"
 import axios from 'axios'
 
-const API_URL = 'http://kata.academy:8022/'
+const API_URL = 'https://api.realworld.io/api/'
 
 export const fetchArticlesNoAuth = () => {
     return async (dispatch: Dispatch<ArticlesAction>) => {

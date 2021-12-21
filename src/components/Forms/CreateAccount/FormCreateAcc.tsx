@@ -1,26 +1,40 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { registerUser } from '../../../store/action-creators/user';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 const styles = require('../Forms.module.scss');
 
-interface ValuesForm {
-    userName: string,
-    email: string,
-    password: string,
-    repeatPass: string,
-    checkBox: boolean
+export interface FormRegisterUser {
+    username?: string,
+    email?: string,
+    password?: string,
+    repeatPass?: string,
+    checkBox?: boolean
 }
 
-const initialValues: ValuesForm = { 
-    userName: '',
+const initialValues: FormRegisterUser = { 
+    username: '',
     email: '',
     password: '',
     repeatPass: '',
     checkBox: false
 };
 
+const reduce = (value: any): FormRegisterUser => {
+    const result = Object.entries(value).slice(0, 3);
+    return Object.fromEntries(result)
+ }
+
 const FormCreateAcc = () => {
+    const {error} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const fromPage = location.state?.from?.pathname || '/'
 
     return (
         <Container className='pt-5 d-flex justify-content-center'>
@@ -28,7 +42,7 @@ const FormCreateAcc = () => {
                 initialValues={ initialValues }
                 validationSchema={
                     Yup.object({
-                        userName: Yup.string()
+                        username: Yup.string()
                             .min(3, 'Must be 3 characters or more').max(20, 'Must be 20 characters or less').required(),
                         email: Yup.string()
                             .email('Invalid email address').required('Required'),
@@ -44,7 +58,7 @@ const FormCreateAcc = () => {
                     })
                 }
                 onSubmit={(values) => {
-                    console.log(JSON.stringify(values, null, 2));
+                    dispatch(registerUser({user: reduce(values)}, () => navigate(fromPage, {replace: true})))
                   }}
             >
                 {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isValid }) => (
@@ -56,16 +70,16 @@ const FormCreateAcc = () => {
                         <Form.Label>Username</Form.Label>
                         <Form.Control 
                             type="text"
-                            name="userName"
+                            name="username"
                             placeholder="Username"
-                            value={values.userName}
+                            value={values.username}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            isValid={touched.userName && !errors.userName}
-                            isInvalid={!!errors.userName}
+                            isValid={touched.username && !errors.username}
+                            isInvalid={!!errors.username}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.userName} 
+                            {errors.username} 
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -129,6 +143,7 @@ const FormCreateAcc = () => {
 
                         />
                     </Form.Group>
+                    {error ? <div className="mb-3 text-danger text-center">{error}</div>: error}
 
                     <Button variant="primary" type="submit" className='w-100 mb-2'>
                         Create
