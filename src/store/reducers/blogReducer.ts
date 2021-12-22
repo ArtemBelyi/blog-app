@@ -30,6 +30,10 @@ export const blogReducer = (state = initialState, action: BlogAction): BlogState
             return {...state, loading: false, error: null, article: action.payload}
         case BlogActionTypes.FETCH_BLOG_ERROR:
             return {...state, loading: false, error: action.payload}
+        case BlogActionTypes.ADD_LIKE:
+            return {...state, article: action.payload}
+        case BlogActionTypes.REMOVE_LIKE:
+            return {...state, article: action.payload}
         default:
             return state
     }

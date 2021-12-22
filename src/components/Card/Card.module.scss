@@ -26,6 +26,19 @@
                 color: $cardTitleColor;
                 text-decoration: none;
             }
+            &__icon {
+                color: #be4bdb;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            &__favorited {
+                color: #be4bdb;
+                font-size: 10px;
+                margin-left: 5px;
+                padding-bottom: 2px;
+                vertical-align: middle;
+
+            }
         }
         .card-tags {
             display: flex;

@@ -37,6 +37,8 @@ export enum BlogActionTypes {
     FETCH_BLOG = 'FETCH_BLOG',
     FETCH_BLOG_SUCCESS = 'FETCH_BLOG_SUCCESS',
     FETCH_BLOG_ERROR = 'FETCH_BLOG_ERROR',
+    ADD_LIKE = 'ADD_LIKE',
+    REMOVE_LIKE = 'REMOVE_LIKE'
 }
 
 interface FetchBlogAction {
@@ -53,6 +55,17 @@ interface FetchBlogErrorAction {
     payload: string
 }
 
+interface AddLikeAction {
+    type: BlogActionTypes.ADD_LIKE
+    payload: Article
+}
+
+interface RemoveLikeAction {
+    type: BlogActionTypes.REMOVE_LIKE
+    payload: Article
+}
 export type BlogAction = FetchBlogAction
     | FetchBlogSuccessAction
     | FetchBlogErrorAction
+    | AddLikeAction
+    | RemoveLikeAction

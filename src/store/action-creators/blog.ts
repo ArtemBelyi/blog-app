@@ -15,3 +15,42 @@ export const fetchBlog = (slug: string | undefined) => {
         }
     }
 }
+
+export const addLike = (slug: string | undefined) => {
+    const TOKEN = `Token ${JSON.parse(sessionStorage.user).token}`
+    console.log(TOKEN)
+    return async (dispatch: Dispatch<BlogAction>) => {
+        try {
+            const response = await axios.post(`${API_URL}articles/${slug}/favorite`, 
+                {user: {email: 'abelyi467@gmail.com' }}, {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'Authorization': TOKEN
+                }
+            })
+            dispatch({type: BlogActionTypes.ADD_LIKE, payload: response.data.article})
+            console.log('Add like')
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+}
+
+export const removeLike = (slug: string | undefined) => {
+    const TOKEN = `Token ${JSON.parse(sessionStorage.user).token}`
+    return async (dispatch: Dispatch<BlogAction>) => {
+        try {
+            const response = await axios.delete(`${API_URL}articles/${slug}/favorite`, {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    'Authorization': TOKEN
+                }
+            })
+            dispatch({type: BlogActionTypes.REMOVE_LIKE, payload: response.data.article})
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+}

@@ -5,7 +5,7 @@ import PaginationBlog from '../Pagination/Pagination';
 import { Container } from 'react-bootstrap';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
-import { fetchArticlesNoAuth } from '../../store/action-creators/articles';
+import { fetchArticlesNoAuth, fetchArticlesAuth } from '../../store/action-creators/articles';
 import { Article } from '../../types/blog';
 
 function compare (state: Article[]) {
@@ -23,19 +23,22 @@ const splitArray = (arr: Article[]) => {
 
 const CardList = () => {
     const {articles, loading, error} = useTypedSelector(state => state.articles)
+    const {isAuth} = useTypedSelector(state => state.user)
     const [page, setPage] = useState(0)
     const dispatch = useDispatch()
 
     const sortArticle = compare([...articles])
     const showArticle = splitArray(sortArticle)
 
+
     useEffect(() => {
-        dispatch(fetchArticlesNoAuth())
-    }, [dispatch])
+        isAuth ? dispatch(fetchArticlesAuth()) : dispatch(fetchArticlesNoAuth())
+    }, [isAuth])
 
     const showPage = (index: number) => {
         setPage(index)
     }
+    console.log(articles)
 
     const errorMessage = error ? <h1>Идет загрузка</h1> : null
     const loadingMessage = loading ? <h1>Идет загрузка</h1> : null
