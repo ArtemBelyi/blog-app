@@ -3,7 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { editProfile } from '../../../store/action-creators/user';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
-import { Formik, useFormik } from 'formik';
+import { Formik } from 'formik';
 import ModalWindow from '../../Modal/Modal';
 import { dataShow } from '../../../types/blog';
 import * as Yup from 'yup';

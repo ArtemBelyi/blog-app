@@ -18,7 +18,6 @@ export const fetchBlog = (slug: string | undefined) => {
 
 export const addLike = (slug: string | undefined) => {
     const TOKEN = `Token ${JSON.parse(sessionStorage.user).token}`
-    console.log(TOKEN)
     return async (dispatch: Dispatch<BlogAction>) => {
         try {
             const response = await axios.post(`${API_URL}articles/${slug}/favorite`, 
@@ -29,7 +28,6 @@ export const addLike = (slug: string | undefined) => {
                 }
             })
             dispatch({type: BlogActionTypes.ADD_LIKE, payload: response.data.article})
-            console.log('Add like')
         } catch (e) {
             console.log(e)
         }

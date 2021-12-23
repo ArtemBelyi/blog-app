@@ -9,6 +9,7 @@ import BlogPage from '../BlogPage/BlogPage';
 import { useDispatch } from 'react-redux';
 import CreateNewArticle from '../Forms/CreateArticle/NewArticle';
 import { isLogged } from '../../store/action-creators/user';
+import EditArticle from '../Forms/EditArticle/EditArticle';
 
 const App = () => {
     const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path="articles" element={<CardList />} />
                     <Route path="articles/new" element={<CreateNewArticle />} />
                     <Route path="articles/:slug" element={<BlogPage />} />
+                    <Route path="articles/:slug/edit" element={<EditArticle />} />
                     <Route path="signup" element={<FormCreateAcc />} />
                     <Route path="signin" element={<FormSignIn />} />
                     <Route path="profile" element={<FormEditProfile />} />

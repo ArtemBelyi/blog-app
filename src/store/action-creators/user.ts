@@ -36,6 +36,8 @@ export const isLogged = () => {
     return (dispatch: Dispatch<UserAction>) => {
         if (sessionStorage.user) {
             dispatch({type: UserActionTypes.IS_LOGGED})
+        } else {
+            dispatch({type: UserActionTypes.IS_LOGGED_OUT})
         }
     }
 }

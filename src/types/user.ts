@@ -27,6 +27,7 @@ export enum UserActionTypes {
     LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS',
     LOGIN_USER_ERROR = 'LOGIN_USER_ERROR',
     IS_LOGGED = 'IS_LOGGED',
+    IS_LOGGED_OUT = 'IS_LOGGED_OUT',
     EDIT_PROFILE_SUCCESS = 'EDIT_PROFILE_SUCCESS',
     EDIT_PROFILE_ERROR = 'EDIT_PROFILE_ERROR'
 }
@@ -58,6 +59,10 @@ interface IsLoggedAction {
     type: UserActionTypes.IS_LOGGED
 }
 
+interface IsLoggedOutAction {
+    type: UserActionTypes.IS_LOGGED_OUT
+}
+
 interface EditProfileAction {
     type: UserActionTypes.EDIT_PROFILE_SUCCESS
     payload: User
@@ -76,3 +81,4 @@ export type UserAction = LoginUserAction
     | EditProfileErrorAction
     | RegisterUserSuccessAction
     | RegisterUserErrorAction
+    | IsLoggedOutAction

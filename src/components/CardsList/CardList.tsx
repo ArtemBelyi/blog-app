@@ -33,12 +33,11 @@ const CardList = () => {
 
     useEffect(() => {
         isAuth ? dispatch(fetchArticlesAuth()) : dispatch(fetchArticlesNoAuth())
-    }, [isAuth])
+    }, [isAuth, dispatch])
 
     const showPage = (index: number) => {
         setPage(index)
     }
-    console.log(articles)
 
     const errorMessage = error ? <h1>Идет загрузка</h1> : null
     const loadingMessage = loading ? <h1>Идет загрузка</h1> : null

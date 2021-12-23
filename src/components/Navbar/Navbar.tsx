@@ -3,13 +3,21 @@ import { NavLink } from 'react-router-dom'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import UserAvatar from '../UserAvatar/UserAvatar';
+import { isLogged } from '../../store/action-creators/user';
+import { useDispatch } from 'react-redux';
 const styles = require('./Navbar.module.scss')
 
 const NavbarComponent = () => {
     const {user, isAuth} = useTypedSelector(state => state.user)
+    const dispatch = useDispatch()
+
+    const removeStorage = () => {
+        sessionStorage.clear()
+        dispatch(isLogged())
+    }
 
     const sign = !isAuth ? <NavLink className={styles['link'] + ' ' + styles['link_active']} to ="/signup">Sign Up</NavLink>
-        : <NavLink className={styles['link-out'] + ' ' + styles['link-out_active']} to ="/signup">Sign Out</NavLink>
+        : <NavLink className={styles['link-out'] + ' ' + styles['link-out_active']} to ="/signin" onClick={() => removeStorage()}>Sign Out</NavLink>
     const avatar = !isAuth ? <NavLink className={styles['link-in']} to ="/signin">Sign In</NavLink> 
         : <NavLink className={styles['link-profile']}to ="/profile"><UserAvatar author={ JSON.parse(sessionStorage.user) || user} /></NavLink>
     const createArticle = <NavLink className={styles['link'] + ' ' + styles['link_active']} to ="articles/new">Create article</NavLink>
