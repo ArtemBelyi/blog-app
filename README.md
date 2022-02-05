@@ -1,1 +1,1 @@
-See the deployed project: https://blog-app-eight-eta.vercel.app/signup
+See the deployed project: https://blog-app-eight-eta.vercel.app
